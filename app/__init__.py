@@ -10,3 +10,12 @@ def create_app():
     app.config['SECRET_KEY'] = 'HudsonWayne'
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///../instance/app.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    
+    db.init_app(app)
+    Migrate(app, db)
+    
+    from .routes import main
+    app.register_blueprint(main)
+    
+    
+    return app
