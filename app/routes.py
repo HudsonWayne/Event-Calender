@@ -10,3 +10,8 @@ main = Blueprint('main', __name__)
 @main.route('/')
 def index():
     return redirect(url_for('main.calendar'))
+
+
+@main.route('/calendar')
+def calendar():
+    return render_template('calendar.html')
