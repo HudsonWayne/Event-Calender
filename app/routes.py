@@ -26,3 +26,19 @@ def events():
         'start': e.start,
         'end': e.end
     } for e in events])
+    
+    
+@main.route('/event/new', methods=['GET', 'POST'])
+def add_event():
+    form = EventForm()
+    if form.validate_on_submit():
+        event = Event(
+            title=form.title.data,
+            start=form.start.data.isoformat(),
+            end=form.end.data.isoformat() if form.end.data else None,
+            description=form.description.data
+        )
+        db.session.add(event)
+        db.session.commit()
+        return redirect(url_for('main.calendar'))
+    return render_template('event_form.html', form=form)
