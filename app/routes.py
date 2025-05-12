@@ -15,3 +15,14 @@ def index():
 @main.route('/calendar')
 def calendar():
     return render_template('calendar.html')
+
+
+@main.route('/events')
+def events():
+    events = Event.query.all()
+    return jsonify([{
+        'id': e.id,
+        'title': e.title,
+        'start': e.start,
+        'end': e.end
+    } for e in events])
