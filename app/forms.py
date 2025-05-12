@@ -8,3 +8,5 @@ class EventForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
     start = DateTimeLocalField('Start Time', format='%Y-%m-%dT%H:%M', validators=[DataRequired()])
     end = DateTimeLocalField('End Time', format='%Y-%m-%dT%H:%M')
+    description = TextAreaField('Description')
+    submit = SubmitField('Save Event')
